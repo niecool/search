@@ -12,10 +12,6 @@ Project Outline
 
 Data Repository
 mysql:
-database:search
+database:152.136.70.24:3306/search
 username:root
-password:
-
-
-
-
+password:@Chengyea
