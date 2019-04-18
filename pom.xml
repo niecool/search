@@ -5,15 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.nie</groupId>
-    <artifactId>index</artifactId>
+    <artifactId>search</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-
-
-    <parent>
-        <groupId>com.nie</groupId>
-        <artifactId>search</artifactId>
-        <version>1.0-SNAPSHOT</version>
-    </parent>
+    <modules>
+        <module>h5-search</module>
+    </modules>
 
 
 </project>
