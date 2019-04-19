@@ -1,4 +1,4 @@
-package com.nie.mandy.client;
+package com.nie.api;
 
 /**
  *
