@@ -7,7 +7,7 @@
     <groupId>com.nie</groupId>
     <artifactId>index</artifactId>
     <version>1.0-SNAPSHOT</version>
-
+    <packaging>war</packaging>
 
     <parent>
         <groupId>com.nie</groupId>
@@ -21,16 +21,70 @@
     </properties>
 
     <dependencies>
+            <!-- spring mvc start-->
+    <!--        <dependency>-->
+    <!--            <groupId>org.springframework</groupId>-->
+    <!--            <artifactId>spring-webmvc</artifactId>-->
+    <!--            <version>${spring.version}</version>-->
+    <!--        </dependency>-->
+
+    <!--        <dependency>-->
+    <!--            <groupId>org.springframework</groupId>-->
+    <!--            <artifactId>spring-web</artifactId>-->
+    <!--            <version>${spring.version}</version>-->
+    <!--        </dependency>-->
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-beans</artifactId>
                 <version>${spring.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-core</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <!-- spring mvc end-->
+
+
             <dependency>
                 <groupId>org.elasticsearch</groupId>
                 <artifactId>elasticsearch</artifactId>
                 <version>${elasticsearch.version}</version>
             </dependency>
+
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
@@ -42,13 +96,54 @@
                 <artifactId>mybatis</artifactId>
                 <version>${mybatis.version}</version>
             </dependency>
-
             <!--mybatis-spring适配器 -->
             <dependency>
                 <groupId>org.mybatis</groupId>
                 <artifactId>mybatis-spring</artifactId>
                 <version>${mybatis-spring.version}</version>
             </dependency>
+            <dependency>
+                <groupId>org.mybatis.generator</groupId>
+                <artifactId>mybatis-generator-core</artifactId>
+                <version>1.3.7</version>
+            </dependency>
+
+
+
+
     </dependencies>
+
+
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.mybatis.generator</groupId>
+            <artifactId>mybatis-generator-maven-plugin</artifactId>
+            <version>1.3.7</version>
+            <configuration>
+                <!--配置文件的位置-->
+                <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
+                <verbose>true</verbose>
+                <overwrite>true</overwrite>
+            </configuration>
+            <executions>
+                <execution>
+                    <id>Generate MyBatis Artifacts</id>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                </execution>
+            </executions>
+            <dependencies>
+                <dependency>
+                    <groupId>org.mybatis.generator</groupId>
+                    <artifactId>mybatis-generator-core</artifactId>
+                    <version>1.3.7</version>
+                </dependency>
+            </dependencies>
+        </plugin>
+    </plugins>
+</build>
+
 
 </project>
