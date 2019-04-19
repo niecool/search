@@ -1,4 +1,4 @@
-package com.nie.mandy.client.com.nie.mandy.es.connection;
+package com.nie.mandy.client.connection;
 
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
