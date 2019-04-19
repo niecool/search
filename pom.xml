@@ -15,4 +15,34 @@
     </modules>
 
 
+    <properties>
+        <!--  project版本统一  -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <jdk.version>1.8</jdk.version>
+        <spring.version>4.3.20.RELEASE</spring.version>
+        <elasticsearch.version>6.7.1</elasticsearch.version>
+        <mysql.connector.version>6.0.6</mysql.connector.version>
+
+        <!--    pom    -->
+    </properties>
+
+    <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-beans</artifactId>-->
+<!--            <version>${spring.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.elasticsearch</groupId>-->
+<!--            <artifactId>elasticsearch</artifactId>-->
+<!--            <version>${elasticsearch.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>mysql</groupId>-->
+<!--            <artifactId>mysql-connector-java</artifactId>-->
+<!--            <version>${mysql.connector.version}</version>-->
+<!--        </dependency>-->
+    </dependencies>
 </project>
