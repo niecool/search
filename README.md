@@ -15,3 +15,7 @@ mysql:
 database:152.136.70.24:3306/search
 username:root
 password:@Chengyea
+
+
+Elasticsearch
+address:http://152.136.70.24:9200/
