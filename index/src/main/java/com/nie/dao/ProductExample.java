@@ -1,4 +1,4 @@
-package com.nie.model.pojo;
+package com.nie.dao;
 
 import java.util.ArrayList;
 import java.util.Date;

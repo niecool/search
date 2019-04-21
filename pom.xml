@@ -24,7 +24,9 @@
         <spring.version>4.3.20.RELEASE</spring.version>
         <elasticsearch.version>6.7.1</elasticsearch.version>
         <mysql.connector.version>6.0.6</mysql.connector.version>
-        <junit5.version>5.3.1</junit5.version>
+        <junit4.versin>4.12</junit4.versin>
+        <spring-test.versin>4.3.10.RELEASE</spring-test.versin>
+<!--        <junit5.version>5.3.1</junit5.version>-->
 
         <log4j.version>1.2.17</log4j.version>
         <log4j.core.version>2.11.1</log4j.core.version>
@@ -34,10 +36,22 @@
     </properties>
 
     <dependencies>
+<!--        <dependency>-->
+<!--            <groupId>org.junit.jupiter</groupId>-->
+<!--            <artifactId>junit-jupiter-api</artifactId>-->
+<!--            <version>${junit5.version}</version>-->
+<!--        </dependency>-->
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <version>${junit5.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit4.versin}</version>
+<!--            <scope>test</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <version>${spring-test.versin}</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

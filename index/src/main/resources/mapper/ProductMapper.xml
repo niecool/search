@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.nie.model.ProductMapper">
+<mapper namespace="com.nie.dao.ProductDao">
   <resultMap id="BaseResultMap" type="com.nie.model.pojo.Product">
     <result column="id" jdbcType="BIGINT" property="id" />
     <result column="product_code" jdbcType="VARCHAR" property="productCode" />
@@ -82,7 +82,7 @@
     name_subtitle, product_description, in_price, product_brand_id, color, create_user, 
     update_user, create_time, update_time, is_delete
   </sql>
-  <select id="selectByExample" parameterType="com.nie.model.pojo.ProductExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.nie.dao.ProductExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,7 +96,7 @@
       order by ${orderByClause}
     </if>
   </select>
-  <delete id="deleteByExample" parameterType="com.nie.model.pojo.ProductExample">
+  <delete id="deleteByExample" parameterType="com.nie.dao.ProductExample">
     delete from product
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -219,7 +219,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.nie.model.pojo.ProductExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.nie.dao.ProductExample" resultType="java.lang.Long">
     select count(*) from product
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
