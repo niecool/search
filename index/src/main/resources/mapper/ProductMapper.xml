@@ -303,4 +303,11 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
+
+  <select id="selectIdByCondition" parameterType="com.nie.dao.ProductExample" resultType="java.lang.Long">
+    select id from product
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
 </mapper>

@@ -24,6 +24,7 @@ public class DataSourceTest {
 
     @Resource
     private DruidDataSource druidDataSource;
+
     @Test
     public void testMybatis()  {
         ProductExample productExample = new ProductExample();
