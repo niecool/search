@@ -38,7 +38,8 @@ public abstract class AbstractDataUpdateChecker implements DataUpdateChecker {
 
     public Long getCheckInterval() {
         // 默认周期设为一天
-        Long interval = 24L * 60 * 60 * 1000;
+//        Long interval = 24L * 60 * 60 * 1000;
+        Long interval =  60L * 1000;
 //        try {
 //            if (config != null) {
 //                interval = (long) (config.getMinute()) * 60 * 1000;

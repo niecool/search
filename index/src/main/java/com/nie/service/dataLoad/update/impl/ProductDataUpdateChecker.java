@@ -11,7 +11,8 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -27,7 +28,7 @@ public class ProductDataUpdateChecker extends AbstractDataUpdateChecker {
     @Override
     public DataChangeMessage getDataChange() {
         DataChangeMessage dcm = new DataChangeMessage();
-        final Date since = new Date(getLastCheckTime());
+        final Timestamp since = new Timestamp(getLastCheckTime());
         ProductExample productExample = new ProductExample();
         productExample.createCriteria().andUpdateTimeGreaterThan(since);
         List<Long> products = productDao.selectIdByCondition(productExample);

@@ -122,15 +122,12 @@ public class DBWatcher extends Thread{
         // 多线程并行执行检测
         List<Future<DataChangeMessage>> futures = new ArrayList<Future<DataChangeMessage>>();
         for (final DataUpdateChecker checker : checkers) {
-            System.out.println("aa");
             Future<DataChangeMessage> future = checkerPool
                     .submit(new Callable<DataChangeMessage>() {
                         @Override
                         public DataChangeMessage call() {
                             try {
-                                System.out.println("11");
                                 DataChangeMessage dcm = checker.getDataChange();
-                                System.out.println("22");
                                 return dcm;
                             } catch (Exception e) {
                                 e.printStackTrace();

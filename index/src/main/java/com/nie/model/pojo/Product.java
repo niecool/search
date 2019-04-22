@@ -1,5 +1,6 @@
 package com.nie.model.pojo;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class Product {
@@ -29,9 +30,9 @@ public class Product {
 
     private Long updateUser;
 
-    private Date createTime;
+    private Timestamp createTime;
 
-    private Date updateTime;
+    private Timestamp updateTime;
 
     private Integer isDelete;
 
@@ -139,19 +140,19 @@ public class Product {
         this.updateUser = updateUser;
     }
 
-    public Date getCreateTime() {
+    public Timestamp getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(Timestamp createTime) {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
+    public Timestamp getUpdateTime() {
         return updateTime;
     }
 
-    public void setUpdateTime(Date updateTime) {
+    public void setUpdateTime(Timestamp updateTime) {
         this.updateTime = updateTime;
     }
 
