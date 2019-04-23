@@ -28,4 +28,9 @@ public class DataRecord<K,V> {
     public void setV(V v) {
         this.v = v;
     }
+
+    @Override
+    public String toString() {
+        return "DataRecord [k=" + k + ", v=" + v + "]";
+    }
 }

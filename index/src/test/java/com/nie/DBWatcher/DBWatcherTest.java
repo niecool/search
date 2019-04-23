@@ -30,11 +30,11 @@ public class DBWatcherTest {
 
     @Test
     public void testDbWatcher() throws InterruptedException, IOException {
-        long d = System.currentTimeMillis();
-        Timestamp t = new Timestamp(d);
-        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:MM:ss");
-        String a = sdf.format(t);
-        System.out.println(a);
+//        long d = System.currentTimeMillis();
+//        Timestamp t = new Timestamp(d);
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyy-MM-dd HH:MM:ss");
+//        String a = sdf.format(t);
+//        System.out.println(a);
 
 
 

@@ -2,6 +2,10 @@ package com.nie.service.dataLoad;
 
 
 import com.nie.model.DataChangeMessage;
+import com.nie.monitor.Observer;
+import com.nie.monitor.ObserverServer;
+import com.nie.monitor.impl.RealtimeDataChangeObserver;
+import com.nie.monitor.impl.RealtimeObserverServer;
 import com.nie.service.dataLoad.update.DataUpdateChecker;
 import com.nie.service.dataLoad.update.DataUpdateCheckerManager;
 import org.apache.log4j.Logger;
@@ -30,10 +34,14 @@ public class DBWatcher extends Thread{
     private int dbCheckerNumber = 2;//config in properties
     private boolean isRunning;
     private ExecutorService checkerPool;
+    private ObserverServer observerServer;//一般是在spring中注入，现在是在构造器中注入。
 
     public DBWatcher() {
         this.setName("DbWatcher");
-//        this.setDaemon(true);
+        List observers = new ArrayList<Observer>();
+        observers.add(new RealtimeDataChangeObserver());
+        observerServer = new RealtimeObserverServer(observers);
+        this.setDaemon(true);
         isRunning = false;
         checkerManager = DataUpdateCheckerManager.getInstance();
     }
@@ -150,12 +158,10 @@ public class DBWatcher extends Thread{
                         && !curChange.getIdList().isEmpty()) {
                     curChange.setVersion(Long.toString(lastCheckTime));
 
-//                    dataChangeListener.onMessage(curChange);//todo
-                    System.out.println("===================changeIds============================");
-                    for(Long id : curChange.getIdList()){
-                        System.out.println("id="+id);
-                    }
-
+                    /**
+                     * 消息观察者模式
+                     */
+                    observerServer.sendMessage(curChange);
                 }
             } catch (Exception e) {
                 log.error(e);

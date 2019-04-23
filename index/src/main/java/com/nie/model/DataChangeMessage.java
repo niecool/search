@@ -7,7 +7,7 @@ import java.util.List;
  * @author zhaochengye
  * @date 2019-04-22 14:11
  */
-public class DataChangeMessage implements Serializable {
+public class DataChangeMessage extends NieMessage {
     private static final long serialVersionUID = -1274052362966490257L;
 
     //业务表类型
@@ -26,7 +26,7 @@ public class DataChangeMessage implements Serializable {
 
     private List<Long> idList;
 
-    private long receiveTimeStamp;
+    private long receiveTimeStamp;//用于判断下一次检查数据库时间
 
     private TYPE type;
 
@@ -79,4 +79,5 @@ public class DataChangeMessage implements Serializable {
     public void setVersion(String version) {
         this.version = version;
     }
+
 }
