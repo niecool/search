@@ -29,7 +29,7 @@ public class DBWatcher extends Thread{
     private Logger log = Logger.getLogger(DBWatcher.class);
 
     private long maxWaitTime = 60 * 1000;
-    private long minWaitTime = 10 * 1000;
+    private long minWaitTime = 10 * 1000;//当数据库没变化的时候会以最小时间查询
     private DataUpdateCheckerManager checkerManager;
     private int dbCheckerNumber = 2;//config in properties
     private boolean isRunning;
@@ -157,6 +157,7 @@ public class DBWatcher extends Thread{
                 if (curChange != null && curChange.getIdList() != null
                         && !curChange.getIdList().isEmpty()) {
                     curChange.setVersion(Long.toString(lastCheckTime));
+                    curChange.setTimeStamp(lastCheckTime);
 
                     /**
                      * 消息观察者模式
@@ -170,7 +171,7 @@ public class DBWatcher extends Thread{
 
         // Update last check time
         for(DataUpdateChecker checker : checkers) {
-            checker.setLastCheckTime(lastCheckTime);
+            checker.setLastCheckTime(lastCheckTime-1);//lastCheckTime-1 避免数据库判断条件加等于
         }
 
     }
