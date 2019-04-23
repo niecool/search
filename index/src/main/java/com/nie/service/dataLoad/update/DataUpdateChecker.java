@@ -10,6 +10,10 @@ import java.util.Date;
  */
 public interface DataUpdateChecker {
 
+     /**
+      * 第一次全量读取一遍，然后是修改的读一遍。//如果数据量太大就和全量的配合起来。
+      * @return
+      */
      DataChangeMessage getDataChange();
 
      public long getLastCheckTime();

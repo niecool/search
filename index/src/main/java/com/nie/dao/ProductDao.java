@@ -15,5 +15,7 @@ public interface ProductDao {
     public Integer delete(ProductExample productExample);
     public Integer query(ProductExample productExample);
 
+    public List<Long> selectIdBySince(String since);
+
 
 }

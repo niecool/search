@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -28,11 +29,8 @@ public class ProductDataUpdateChecker extends AbstractDataUpdateChecker {
     @Override
     public DataChangeMessage getDataChange() {
         DataChangeMessage dcm = new DataChangeMessage();
-        final Timestamp since = new Timestamp(getLastCheckTime());
-        ProductExample productExample = new ProductExample();
-        productExample.createCriteria().andUpdateTimeGreaterThan(since);
-        List<Long> products = productDao.selectIdByCondition(productExample);
-
+        final String since = getLastCheckDate();
+        List<Long> products = productDao.selectIdBySince(since);
         if(!CollectionUtils.isEmpty(products)){
             dcm.setIdList(products);
             dcm.setReceiveTimeStamp(UniqueTs.get().next());
@@ -54,4 +52,6 @@ public class ProductDataUpdateChecker extends AbstractDataUpdateChecker {
         setCheckerName(checkerName);
         DataUpdateCheckerManager.getInstance().register(this);
     }
+
+
 }

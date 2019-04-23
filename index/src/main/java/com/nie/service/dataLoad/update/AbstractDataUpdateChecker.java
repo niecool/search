@@ -1,5 +1,8 @@
 package com.nie.service.dataLoad.update;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+
 /**
  * @author zhaochengye
  * @date 2019-04-22 14:37
@@ -39,7 +42,7 @@ public abstract class AbstractDataUpdateChecker implements DataUpdateChecker {
     public Long getCheckInterval() {
         // 默认周期设为一天
 //        Long interval = 24L * 60 * 60 * 1000;
-        Long interval =  60L * 1000;
+        Long interval =  10L * 1000;
 //        try {
 //            if (config != null) {
 //                interval = (long) (config.getMinute()) * 60 * 1000;
@@ -53,4 +56,18 @@ public abstract class AbstractDataUpdateChecker implements DataUpdateChecker {
     }
 
     public abstract void init();
+
+    /**
+     * Get date string of last check time
+     *
+     * @return
+     */
+    public String getLastCheckDate() {
+        Long timestamp = getLastCheckTime();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date sinceDate = new Date(timestamp);
+        String date = format.format(sinceDate);
+
+        return date;
+    }
 }

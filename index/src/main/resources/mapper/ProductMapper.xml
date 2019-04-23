@@ -310,4 +310,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </select>
+
+  <!--  DBChecker 精确到秒 -->
+  <select id="selectIdBySince" parameterType="java.lang.String" resultType="java.lang.Long">
+    select id from product
+    <if test="_parameter != null">
+    where update_time > #{since}
+    </if>
+  </select>
 </mapper>

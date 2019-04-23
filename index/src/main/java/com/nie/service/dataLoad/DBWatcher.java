@@ -36,12 +36,12 @@ public class DBWatcher extends Thread{
 //        this.setDaemon(true);
         isRunning = false;
         checkerManager = DataUpdateCheckerManager.getInstance();
-        checkerPool = Executors.newFixedThreadPool(2);//new NamedThreadFactory("DBChecker")
-
     }
 
     @Override
     public void run(){
+        checkerPool = Executors.newFixedThreadPool(dbCheckerNumber,new NamedThreadFactory("DBChecker"));
+        isRunning = true;
         while (true) {
             try {
                 Map<String, List<DataUpdateChecker>> checkerGroup = getUpdateCheckerGroup();
