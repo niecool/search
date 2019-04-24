@@ -1,6 +1,7 @@
 package com.nie.frame;
 
 /**
+ * 存在这样的数据结构是为了更好的扩展索引支持的数据类型。
  * @author zhaochengye
  * @date 2019-04-23 12:31
  */

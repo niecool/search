@@ -6,6 +6,7 @@ import javafx.application.Application;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -26,7 +27,7 @@ import java.util.concurrent.Executors;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/spring-config.xml")
-public class DBWatcherTest {
+public class DBWatcherTest extends ApplicationObjectSupport {
 
     @Test
     public void testDbWatcher() throws InterruptedException, IOException {
@@ -38,7 +39,8 @@ public class DBWatcherTest {
 
 
 
-        DBWatcher watcher = new DBWatcher();
+        ApplicationContext context = getApplicationContext();
+        DBWatcher watcher = (DBWatcher)context.getBean("DBWatcher");
         watcher.setDbCheckerNumber(2);
         Map<String, List<DataUpdateChecker>> group = watcher.getUpdateCheckerGroup();
         Long time = watcher.getNextcheckTime(group);

@@ -8,13 +8,13 @@ import java.util.List;
  * @author zhaochengye
  * @date 2019-04-23 14:11
  */
-public class ProcessContext<D extends DataRecord> {
+public class ProcessorContext<D extends DataRecord> {
 
     private String indexName = null;
 
     private String source;//数据来源
 
-    private List<D> dataRecords;
+    private List<D> dataRecords;//这里是支持任何map-reduce数据结构的数据以list组合结构传递过来处理。
 
     public String getIndexName() {
         return indexName;

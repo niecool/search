@@ -18,6 +18,7 @@ public class RealtimeObserverServer implements ObserverServer {
 
     private List<Observer> observers;
 
+    public RealtimeObserverServer(){};
     public RealtimeObserverServer(List<Observer> observers){
         this.observers = observers;
     }

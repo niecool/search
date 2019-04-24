@@ -7,6 +7,9 @@ import com.nie.model.NieMessage;
 import com.nie.monitor.Observer;
 import com.nie.service.DataServer;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.Resource;
 
 /**
  * @author zhaochengye
@@ -16,6 +19,7 @@ public class RealtimeDataChangeObserver implements Observer {
 
     private Logger log = Logger.getLogger(RealtimeDataChangeObserver.class);
     private DataChangeMessage message;
+    @Resource
     private DataServer dataServer;
 
 

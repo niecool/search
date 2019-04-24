@@ -36,15 +36,15 @@ public class DBWatcher extends Thread{
     private ExecutorService checkerPool;
     private ObserverServer observerServer;//一般是在spring中注入，现在是在构造器中注入。
 
-    public DBWatcher() {
+    public DBWatcher(ObserverServer server, int threadPoolNum) {
+        this.dbCheckerNumber = threadPoolNum;
         this.setName("DbWatcher");
-        List observers = new ArrayList<Observer>();
-        observers.add(new RealtimeDataChangeObserver());
-        observerServer = new RealtimeObserverServer(observers);
+        this.observerServer = server;
         this.setDaemon(true);
         isRunning = false;
-        checkerManager = DataUpdateCheckerManager.getInstance();
+        checkerManager = DataUpdateCheckerManager.getInstance();//单例模式，静态调用
     }
+
 
     @Override
     public void run(){
