@@ -20,6 +20,6 @@ public class ProductDaoManager {
     public List<Product> queryProductByIds(List<Long> ids){
         ProductExample productExample = new ProductExample();
         productExample.createCriteria().andIdIn(ids);
-        return productDao.queryForList(productExample);
+        return productDao.selectByExample(productExample);
     }
 }

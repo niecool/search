@@ -3,6 +3,7 @@ package com.nie.service.realtime;
 import com.nie.model.DataChangeMessage;
 import com.nie.model.ProductIndexable;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -21,8 +22,8 @@ public class RealtimeIndexableBuilder {
     private int extendProductCount;
     private int deleteProductCount;
 
-    @Resource
-    private RealTimeIndexableAssembler samRealTimeIndexableAssembler;
+    @Autowired
+    private RealTimeIndexableAssembler realTimeIndexableAssembler;
 
     public List<ProductIndexable> buildRouter(Collection<Long> productIds, String source) throws Exception {
         return  fullUpdate(productIds,source);
@@ -34,9 +35,9 @@ public class RealtimeIndexableBuilder {
         if(CollectionUtils.isEmpty(productIds)) {
             return null;
         }
-        List<ProductIndexable> productIndexableList = samRealTimeIndexableAssembler.buildProductIndexable(source, productIds);
-        this.extendProductCount = samRealTimeIndexableAssembler.getExtendProductCount();
-        this.deleteProductCount = samRealTimeIndexableAssembler.getDeleteProductCount();
+        List<ProductIndexable> productIndexableList = realTimeIndexableAssembler.buildProductIndexable(source, productIds);
+        this.extendProductCount = realTimeIndexableAssembler.getExtendProductCount();
+        this.deleteProductCount = realTimeIndexableAssembler.getDeleteProductCount();
         return productIndexableList;
     }
 
@@ -55,4 +56,5 @@ public class RealtimeIndexableBuilder {
     public void setDeleteProductCount(int deleteProductCount) {
         this.deleteProductCount = deleteProductCount;
     }
+
 }

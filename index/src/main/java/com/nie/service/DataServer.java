@@ -6,6 +6,7 @@ import com.nie.model.ProductIndexable;
 import com.nie.service.realtime.RealtimeIndexableBuilder;
 import com.nie.utils.NetUtil;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -19,7 +20,7 @@ import java.util.List;
 public class DataServer implements DataService{
     private Logger log = Logger.getLogger(DataServer.class);
 
-    @Resource
+    @Autowired
     private RealtimeIndexableBuilder realtimeIndexableBuilder;
 
     @Override
@@ -37,6 +38,14 @@ public class DataServer implements DataService{
         dataServiceResponse.setProductIndexableList(products);
         dataServiceResponse.setDataServiceIp(NetUtil.getLocalIP());
 
-        return null;
+        return dataServiceResponse;
+    }
+
+    public RealtimeIndexableBuilder getRealtimeIndexableBuilder() {
+        return realtimeIndexableBuilder;
+    }
+
+    public void setRealtimeIndexableBuilder(RealtimeIndexableBuilder realtimeIndexableBuilder) {
+        this.realtimeIndexableBuilder = realtimeIndexableBuilder;
     }
 }

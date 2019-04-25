@@ -2,6 +2,7 @@ package com.nie.service.realtime.processor;
 
 import com.nie.frame.Processor;
 import com.nie.frame.process.ProcessorContext;
+import org.springframework.stereotype.Component;
 
 /**
  *
@@ -10,6 +11,7 @@ import com.nie.frame.process.ProcessorContext;
  * @author zhaochengye
  * @date 2019-04-24 19:16
  */
+@Component
 public class SegmentWordsProcessor implements Processor {
     @Override
     public String getName() {

@@ -13,7 +13,7 @@ import java.util.Set;
 public class RealTimeProcessorContext extends ProcessorContext {
 
     private Collection<Long> initialProductIds;//初始产品id集合
-//    private Set<Long> indexProductIds;
+    private Set<Long> indexProductIds;
 //    private Map<String,String> inputProductsMap;
     private int extendProductCount;//扩展后的产品数
 //    private int deleteProductCount;//删除的产品数
@@ -28,13 +28,13 @@ public class RealTimeProcessorContext extends ProcessorContext {
         this.initialProductIds = initialProductIds;
     }
 
-//    public Set<Long> getIndexProductIds() {
-//        return indexProductIds;
-//    }
-//
-//    public void setIndexProductIds(Set<Long> indexProductIds) {
-//        this.indexProductIds = indexProductIds;
-//    }
+    public Set<Long> getIndexProductIds() {
+        return indexProductIds;
+    }
+
+    public void setIndexProductIds(Set<Long> indexProductIds) {
+        this.indexProductIds = indexProductIds;
+    }
 //
 //    public Map<String, String> getInputProductsMap() {
 //        return inputProductsMap;

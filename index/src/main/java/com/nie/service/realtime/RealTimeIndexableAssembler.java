@@ -4,24 +4,26 @@ import com.nie.DaoManager.ProductDaoManager;
 import com.nie.frame.DataRecord;
 import com.nie.frame.Processor;
 import com.nie.frame.process.RealTimeProcessorContext;
+import com.nie.model.BusinessProduct;
 import com.nie.model.ProductIndexable;
+import com.nie.service.realtime.processor.Convert2ProductIndexable;
 import com.nie.service.realtime.processor.ExpandProductIdsProcessor;
 import com.nie.service.realtime.processor.SegmentWordsProcessor;
+import com.nie.utils.ApplicationContextUtils;
 import org.apache.log4j.Logger;
+import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhaochengye
  * @date 2019-04-23 21:54
  */
 @Component
-public class RealTimeIndexableAssembler {
+public class RealTimeIndexableAssembler extends ApplicationObjectSupport {
     private static Logger log = Logger.getLogger(RealTimeIndexableAssembler.class);
 
     private int extendProductCount;
@@ -54,11 +56,20 @@ public class RealTimeIndexableAssembler {
         //3.shuffle处理阶段
 
         //4.reduce处理阶段
-
-        //5.拿到RealTimeProcessorContext里面的数据
-//        List<DataRecord<String, BusinessProduct>> dataRecords = realTimeProcessorContext.getDataRecords();
-        List<ProductIndexable> productIndexables = new ArrayList<>();
-        return productIndexables;
+        List<Processor<DataRecord>> reduceProcessors = getReduceProcessor();
+        for(Processor processor : reduceProcessors){
+            processor.process(realTimeProcessorContext);
+        }
+        //5.拿到RealTimeProcessorContext里面已经处理好的索引数据
+        Map<String, DataRecord<String, ProductIndexable>> dataRecords = (Map<String, DataRecord<String, ProductIndexable>>)realTimeProcessorContext.getDataRecordsMap();
+        List<ProductIndexable> productIndexableList = new ArrayList<>();
+        if(dataRecords.isEmpty())return productIndexableList;
+        Iterator iterator = dataRecords.values().iterator();
+        while (iterator.hasNext()){
+            DataRecord<String, ProductIndexable> dataRecord = (DataRecord<String, ProductIndexable>)iterator.next();
+            productIndexableList.add(dataRecord.getV());
+        }
+        return productIndexableList;
     }
 
 
@@ -68,14 +79,15 @@ public class RealTimeIndexableAssembler {
 
     List<Processor<DataRecord>>getMapProcessor(){
         List<Processor<DataRecord>> mapProcessors = new ArrayList<Processor<DataRecord>>();
-        mapProcessors.add(new ExpandProductIdsProcessor());
-        mapProcessors.add(new SegmentWordsProcessor());
+        mapProcessors.add((ExpandProductIdsProcessor)(getApplicationContext().getBean("expandProductIdsProcessor")));
+        mapProcessors.add((Convert2ProductIndexable)(getApplicationContext().getBean("convert2ProductIndexable")));
+        mapProcessors.add((SegmentWordsProcessor)(getApplicationContext().getBean("segmentWordsProcessor")));
         return mapProcessors;
     }
 
     List<Processor<DataRecord>>getReduceProcessor(){
         List<Processor<DataRecord>> reduceProcessors = new ArrayList<Processor<DataRecord>>();
-//        mapProcessors.add(new SegmentWordsProcessor());
+//        reduceProcessors.add(new Convert2ProductIndexable());
         return reduceProcessors;
     }
 
