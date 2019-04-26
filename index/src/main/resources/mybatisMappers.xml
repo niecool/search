@@ -7,5 +7,6 @@
     </settings>
     <mappers>
         <mapper resource="mapper/ProductMapper.xml"/>
+        <mapper resource="mapper/KeywordDictMapper.xml"/>
     </mappers>
 </configuration>
