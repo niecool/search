@@ -11,6 +11,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * @author zhaochengye
@@ -36,9 +38,18 @@ public class ImportCSV2DB {
         File file = new File("/Users/zhaochengye/Documents/gitProject2/search/segments/src/sql/searchUTF8.txt");
         List<KeywordDict> list = ImportCSV2DB.importCsv(file);
         if(CollectionUtils.isEmpty(list)) return;
+
+        ExecutorService pool = Executors.newFixedThreadPool(8);
         if(list.size()>100){
             for (int i = 0; i < list.size() / 100; i++) {
-                keywordDictDaoManager.batchInsert(list.subList(i*100,(i+1)*100 > list.size() ? list.size() : (i+1)*100));
+                final int l = i;
+                pool.execute(new Runnable() {
+                    @Override
+                    public void run() {
+                        System.out.println("========================================================================"+l);
+                        keywordDictDaoManager.batchInsert(list.subList(l*100,(l+1)*100 > list.size() ? list.size() : (l+1)*100));
+                    }
+                });
             }
         }else{
              keywordDictDaoManager.batchInsert(list);
