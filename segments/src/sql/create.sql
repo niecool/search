@@ -1,0 +1,19 @@
+CREATE TABLE `KEYWORD_DICT` (
+  `ID` int(18) NOT NULL AUTO_INCREMENT COMMENT '流水号',
+  `KEYWORD` varchar(100) NOT NULL DEFAULT '' COMMENT '词组',
+  `TYPE` int(2) DEFAULT '99' COMMENT '词性',
+  `SYNONYM` varchar(500) DEFAULT NULL COMMENT '同义词',
+  `EXTENTED` varchar(20000) DEFAULT '' COMMENT '扩展词',
+  `LAST_UPDATE_ID` decimal(20,0) DEFAULT NULL COMMENT '最后修改人ID',
+  `LAST_UPDATE_TIME` datetime DEFAULT NULL COMMENT '最后修改时间',
+  `STATUS` smallint(1) DEFAULT '0' COMMENT '状态，1:已作废,0:正常',
+  `DATA_FROM` char(1) DEFAULT NULL COMMENT '数据来源，1:淘宝导入，2:一号店导入，3:用户录入，4.用户导入',
+  `LAST_UPDATE_NAME` varchar(100) NOT NULL DEFAULT '' COMMENT '最后修改人',
+  `IS_CHECK` smallint(1) NOT NULL DEFAULT '0' COMMENT '0:未检查 1：已检查',
+  `RELATIVED` varchar(500) DEFAULT '' COMMENT '父子词',
+  `INCOMPATIBLE` varchar(500) DEFAULT '' COMMENT '互斥词',
+  PRIMARY KEY (`ID`),
+  KEY `idx_type` (`TYPE`),
+  KEY `idx_KEYWORD` (`KEYWORD`),
+  KEY `idx_staus` (`STATUS`)
+) ENGINE=InnoDB AUTO_INCREMENT=1682787 DEFAULT CHARSET=utf8

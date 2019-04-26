@@ -25,6 +25,6 @@
         </sqlMapGenerator>
 
 
-        <table tableName="product"></table>
+        <table tableName="keyword_dict"></table>
     </context>
 </generatorConfiguration>

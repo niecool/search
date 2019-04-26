@@ -12,6 +12,7 @@
         <module>h5-search</module>
         <module>index</module>
         <module>mandy</module>
+        <module>segments</module>
     </modules>
 
 
