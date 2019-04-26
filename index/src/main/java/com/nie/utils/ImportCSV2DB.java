@@ -1,5 +1,6 @@
 package com.nie.utils;
 
+import com.alibaba.druid.sql.visitor.functions.Char;
 import com.nie.DaoManager.KeywordDictDaoManager;
 import com.nie.model.pojo.KeywordDict;
 import org.springframework.stereotype.Component;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import java.io.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -38,16 +40,21 @@ public class ImportCSV2DB {
         File file = new File("/Users/zhaochengye/Documents/gitProject2/search/segments/src/sql/searchUTF8.txt");
         List<KeywordDict> list = ImportCSV2DB.importCsv(file);
         if(CollectionUtils.isEmpty(list)) return;
-
-        ExecutorService pool = Executors.newFixedThreadPool(8);
-        if(list.size()>100){
-            for (int i = 0; i < list.size() / 100; i++) {
+        System.out.println(list.size()+"zcy");
+        ExecutorService pool = Executors.newFixedThreadPool(16);
+        if(list.size()>1000){
+            for (int i = 0; i < list.size()/1000 + 1; i++) {
                 final int l = i;
                 pool.execute(new Runnable() {
                     @Override
                     public void run() {
                         System.out.println("========================================================================"+l);
-                        keywordDictDaoManager.batchInsert(list.subList(l*100,(l+1)*100 > list.size() ? list.size() : (l+1)*100));
+                        try {
+                            keywordDictDaoManager.batchInsert(list.subList(l * 1000, (l + 1) * 1000 > list.size() ? list.size() : (l + 1) * 1000));
+                        }catch (Exception e){
+                            e.printStackTrace();
+                            System.exit(0);//错误就终止，不能漏掉
+                        }
                     }
                 });
             }
@@ -57,6 +64,16 @@ public class ImportCSV2DB {
 
     }
 
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        for (int i = 0; i < 123; i++) {
+            list.add(i);
+        }
+        for (int i = 0; i < list.size()/10+1; i++) {
+            List<Integer> list1 = list.subList(i * 10, (i + 1) * 10 > list.size() ? list.size() : (i + 1) * 10);
+            System.out.println(list1.size());
+        }
+    }
 
     public static List<KeywordDict> importCsv(File file){
         List<KeywordDict> dataList=new ArrayList<KeywordDict>();
