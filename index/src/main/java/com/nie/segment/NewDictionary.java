@@ -17,7 +17,7 @@ public class NewDictionary {
     public static final String DEFAULT_DIC_MAIN = "com/yhd/segment/dic/segment.dic";
     public static final String DEFAULT_DIC_QUANTIFIER = "com/yhd/segment/dic/quantifier.dic";
 
-    public static final String DEFAULT_BIG5TOCN_DICT = "com/yhd/segment/dic/big2cn.dic";
+    public static final String DEFAULT_BIG5TOCN_DICT = "dic/big2cn.dic";
     public static final String DEFAULT_DUOYINZI_DICT = "com/yhd/segment/dic/duoYinZi_ZuCi.dic";
     public static final String DEFAULT_PINGYIN = "com/yhd/segment/dic/pinyin.dic";
 

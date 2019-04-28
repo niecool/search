@@ -15,10 +15,14 @@ public class Helloword {
             IndexWriter writer = new IndexWriterFactory().getSingletonIndexWriter();
 
             Field field1 = new StringField("fileName","HELLO word world word haha.", Field.Store.YES );
+            Field field3 = new StringField("fileName","HELLO word", Field.Store.YES );
+            Field field4 = new StringField("fileName","你好", Field.Store.YES );
             Field field2 = new StringField("fileContent","Directory dir = FSDirectory.open(Paths.get", Field.Store.NO);
             Document document = new Document();
             document.add(field1);
             document.add(field2);
+            document.add(field3);
+            document.add(field4);
             writer.addDocument(document);
             writer.close();
         } catch (IOException e) {
