@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class KeywordDict {
 
-    KeywordDict(){
+    public KeywordDict(){
 
     }
     private Long id;
