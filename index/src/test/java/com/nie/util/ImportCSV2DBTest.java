@@ -24,7 +24,11 @@ public class ImportCSV2DBTest extends ApplicationObjectSupport {
         ApplicationContext context = getApplicationContext();
         ImportCSV2DB importCSV2DB = (ImportCSV2DB) context.getBean("importCSV2DB");
 //        importCSV2DB.insertOneRecord();
-        importCSV2DB.insertAll();//363182
+//        importCSV2DB.insertAll();//363182
+
+
+        importCSV2DB.testStream();//363182
+
         while (true);
     }
 }

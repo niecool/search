@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zhaochengye
@@ -34,6 +34,96 @@ public class ImportCSV2DB {
         List<KeywordDict> list = ImportCSV2DB.importCsv(file);
         KeywordDict keywordDict = list.get(0);
         int a = keywordDictDaoManager.insert(keywordDict);
+    }
+
+    /**
+     *
+     */
+    public void testStream(){
+        File file = new File("/Users/zhaochengye/Documents/gitProject2/search/segments/src/sql/searchUTF8.txt");
+        List<KeywordDict> list = ImportCSV2DB.importCsv(file);
+        long start = System.currentTimeMillis();
+        System.out.println(start);
+
+
+        System.out.println(Runtime.getRuntime().freeMemory());
+        list.addAll(list);
+        list.addAll(list);
+        list.addAll(list);
+        list.addAll(list);
+        list.addAll(list);
+        list.addAll(list);
+        list.addAll(list);
+        list.addAll(list);
+        System.out.println(list.size());
+        long process = System.currentTimeMillis();
+        System.out.println(process - start);
+        List<Future> futures = new ArrayList<>();
+//        if(list.size()>100000){
+//            ExecutorService service = Executors.newFixedThreadPool(8);
+//            for (int i = 0; i < list.size()/100000 + 1; i++) {
+//                final int l = i;
+//                Future<Boolean> future = service.submit(new Callable<Boolean>() {
+//                    @Override
+//                    public Boolean call() {
+//                        System.out.println("========================================================================"+l);
+//                        try {
+//                           haha(list.subList(l * 100000, (l + 1) * 100000 > list.size() ? list.size() : (l + 1) * 100000));
+//                           return true;
+//                        }catch (Exception e){
+//                            e.printStackTrace();
+//                            return null;
+////                            System.exit(0);//错误就终止，不能漏掉
+//                        }
+//                    }
+//                });
+//                futures.add(future);
+//            }
+//        }else{
+            haha(list);
+//        }
+
+
+for (Future<Boolean> future: futures){
+    try {
+        Boolean su = future.get();
+
+    } catch (InterruptedException e) {
+        e.printStackTrace();
+    } catch (ExecutionException e) {
+        e.printStackTrace();
+    }
+}
+
+
+
+
+        System.out.println(Runtime.getRuntime().freeMemory());
+        System.out.println(System.currentTimeMillis()-process+"==============+++++++++++++++++++++===============");
+        System.out.println(list.size());
+    }
+
+    /**
+     *
+     * asd  asdnie
+     *
+     * ....
+     *
+     * asd asdnie + nie
+     * asd asdnienie
+     *
+     */
+    public void haha(List<KeywordDict> list){
+//        for (int i = 0; i < list.size(); i++) {
+//            KeywordDict keywordDicts = list.get(i);
+//            keywordDicts.setKeyword(keywordDicts.getKeyword()+keywordDicts.getLastUpdateName());
+////            if(i%100000==0){
+////                System.out.println(i);
+////            }
+//        }
+//        list = list.subList(0,1);
+        list.parallelStream().map(x -> x.combine()).collect(Collectors.toList());
+//        list.stream().forEach(KeywordDict);
     }
 
     public void insertAll(){

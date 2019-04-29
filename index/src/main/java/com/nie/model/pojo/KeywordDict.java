@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class KeywordDict {
+
+    KeywordDict(){
+
+    }
     private Long id;
 
     private String keyword;
@@ -133,4 +137,13 @@ public class KeywordDict {
     public void setIncompatible(String incompatible) {
         this.incompatible = incompatible == null ? null : incompatible.trim();
     }
+    
+    /**
+     * 
+     */
+    public KeywordDict combine(){
+        this.setKeyword(this.getKeyword()+this.getLastUpdateName());
+        return this;
+    }
+    
 }

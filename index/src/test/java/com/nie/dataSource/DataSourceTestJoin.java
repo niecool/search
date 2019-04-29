@@ -17,7 +17,7 @@ import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "/spring-config.xml")
-public class DataSourceTest {
+public class DataSourceTestJoin {
 
     @Resource
     private ProductDao productDao;
