@@ -1,6 +1,6 @@
 package com.nie.segment.utils;
 
-import com.nie.segment.NewDictionary;
+import com.nie.segment.dict.NewDictionary;
 import org.apache.log4j.Logger;
 
 import java.io.BufferedReader;
