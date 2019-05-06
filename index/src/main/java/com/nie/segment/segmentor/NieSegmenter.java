@@ -5,7 +5,7 @@ import com.nie.segment.dict.NewDictionary;
 import com.nie.segment.config.SegmentConf;
 import com.nie.segment.arbitrator.NieArbitrator;
 import com.nie.segment.utils.Big5Convertor;
-import com.nie.wordTag.WordTag;
+import com.nie.segment.wordTag.WordTag;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,6 +16,7 @@ import java.util.Map;
  * @author zhaochengye
  * @date 2019-04-27 00:03
  */
+
 public class NieSegmenter {
 
     private NewDictionary dictionary;

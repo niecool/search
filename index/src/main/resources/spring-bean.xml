@@ -16,7 +16,18 @@
     </bean>
     <!--  DBWatcher end  -->
 
-<!--  DBWatcher processor start  -->
-
-    <!--  DBWatcher processor end  -->
+<!--  segmentWordsProcessor start  -->
+    <bean id="defaultDic" class="com.nie.segment.dict.NewDictionary">
+        <constructor-arg index="0">
+            <null/>
+        </constructor-arg>
+        <constructor-arg index="1" value="true"/>
+    </bean>
+    <bean id="nieSegmenter" class="com.nie.segment.segmentor.NieSegmenter">
+        <constructor-arg name="dictionary" ref="defaultDic"/>
+    </bean>
+    <bean id="segmentWordsProcessor" class="com.nie.service.realtime.processor.SegmentWordsProcessor">
+        <constructor-arg name="nieSegmenter" ref="nieSegmenter"/>
+    </bean>
+    <!--  segmentWordsProcessor end  -->
 </beans>

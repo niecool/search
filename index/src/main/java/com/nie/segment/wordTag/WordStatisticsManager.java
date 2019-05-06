@@ -1,4 +1,4 @@
-package com.nie.wordTag;
+package com.nie.segment.wordTag;
 
 import com.nie.segment.model.Lexeme;
 import com.nie.segment.dict.NewDictionary;

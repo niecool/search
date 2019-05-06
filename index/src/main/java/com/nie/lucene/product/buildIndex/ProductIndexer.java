@@ -47,7 +47,12 @@ public class ProductIndexer {
             document.add(new StringField("product_ename", p.getProductEname() == null ? "" : p.getProductEname(), Field.Store.YES));
             document.add(new StringField("category_id", p.getCategoryId() == null ? "" : p.getCategoryId(), Field.Store.NO));//不需要展示全部
 
-
+            String[] noScoreWords = p.getNoScoreWords();
+            if(noScoreWords != null && noScoreWords.length>0){
+                for (int i = 0; i < noScoreWords.length; i++) {
+                    document.add(new StringField("no_score_words", noScoreWords[i], Field.Store.NO));
+                }
+            }
             documents.add(document);
         }
     }

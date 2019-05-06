@@ -1,4 +1,4 @@
-package com.nie.segment;
+package com.nie.segment.lucene;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.Tokenizer;

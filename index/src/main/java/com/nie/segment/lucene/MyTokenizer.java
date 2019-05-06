@@ -1,4 +1,4 @@
-package com.nie.segment;
+package com.nie.segment.lucene;
 
 import com.nie.segment.model.Lexeme;
 import com.nie.segment.segmentor.CompositeSegmenter;
@@ -15,7 +15,7 @@ public class MyTokenizer extends Tokenizer {
     @Override
     public boolean incrementToken() throws IOException {
 //        //清除所有的词元属性
-//        clearAttributes();
+        clearAttributes();
 //        Lexeme nextLexeme = CompositeSegmenter.next();
 //        if(nextLexeme != null){
 //            //将Lexeme转成Attributes

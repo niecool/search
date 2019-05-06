@@ -1,4 +1,4 @@
-package com.nie.wordTag;
+package com.nie.segment.wordTag;
 
 import java.util.HashMap;
 
