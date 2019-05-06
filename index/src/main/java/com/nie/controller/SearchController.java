@@ -43,6 +43,7 @@ public class SearchController {
             if(!CollectionUtils.isEmpty(responses)){
                 result.setCode(200);
                 result.setData(responses);
+                result.setSegments(searchContext.getSegments());
                 result.setMsg("查询成功");
             }else {
                 result.setCode(201);

@@ -1,6 +1,7 @@
 package com.nie.controller.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * @author zhaochengye
@@ -15,6 +16,8 @@ public class Result<D> implements Serializable {
     private String msg;
 
     private D data;
+
+    private List<String> segments;
 
     public boolean isSuccess() {
         return success;
@@ -46,5 +49,13 @@ public class Result<D> implements Serializable {
 
     public void setData(D data) {
         this.data = data;
+    }
+
+    public List<String> getSegments() {
+        return segments;
+    }
+
+    public void setSegments(List<String> segments) {
+        this.segments = segments;
     }
 }

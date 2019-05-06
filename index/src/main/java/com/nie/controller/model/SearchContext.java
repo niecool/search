@@ -14,7 +14,7 @@ public class SearchContext {
 
     private Query query;
 
-    private String[] noScoreWords;
+    private List<String> segments;
 
     public ProductRequest getProductRequest() {
         return productRequest;
@@ -30,5 +30,13 @@ public class SearchContext {
 
     public void setQuery(Query query) {
         this.query = query;
+    }
+
+    public List<String> getSegments() {
+        return segments;
+    }
+
+    public void setSegments(List<String> segments) {
+        this.segments = segments;
     }
 }

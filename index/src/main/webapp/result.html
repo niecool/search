@@ -52,6 +52,7 @@
         $.get(url,data, function(msg)         {
             msg = JSON.parse(msg)
             if(msg && msg.success && msg.code==200){
+                hightLightReplace(msg.data,msg.segments)
                 renderPage(msg.data);
             }else if(msg && msg.success) {
                 alert("返回结果为空！请重新输入关键词");
@@ -67,14 +68,36 @@
             for (let i = 0; i < data.length; i++) {
                 var p = data[i];
                 html += '<li class="list-group-item">' +
-                    'productCname=' + data[i].productCname +
-                        'id='+data[i].id +
-                        'inPrice='+ data[i].inPrice+
-                        ''
-                + '</li>';
+                    'id='+data[i].id +' || '+
+                    'productCname=' + data[i].productCname +' || '+
+                    'productEname=' + data[i].productEname +' || '+
+                    'nameSubtitle=' + data[i].nameSubtitle +' || '+
+                    'productDescription=' + data[i].productDescription +' || '+
+                    'inPrice='+ data[i].inPrice+
+                    '</li>';
             }
-            debugger;
             $("#ProductContent").html(html)
+        }
+
+        var hightLightReplace = function (data,segments) {
+            for (let i = 0; i < segments.length; i++) {
+                var str = segments[i];
+                for (let j = 0; j < data.length; j++) {
+                    if(data[j].productCname){
+                        data[j].productCname = data[j].productCname.replace(str,'<font color="red">'+str+'</font>')
+                    }
+                    if(data[j].productEname){
+                        data[j].productEname = data[j].productEname.replace(str,'<font color="red">'+str+'</font>')
+                    }
+                    if(data[j].nameSubtitle){
+                        data[j].nameSubtitle = data[j].nameSubtitle.replace(str,'<font color="red">'+str+'</font>')
+                    }
+                    if(data[j].productDescription){
+                        data[j].productDescription = data[j].productDescription.replace(str,'<font color="red">'+str+'</font>')
+                    }
+
+                }
+            }
         }
 
     </script>

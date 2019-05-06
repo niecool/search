@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.*;
+import org.apache.lucene.search.highlight.SimpleHTMLFormatter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -72,6 +73,7 @@ public class SearchService {
         }
         BooleanQuery booleanQuery = builder.build();
         searchContext.setQuery(booleanQuery);
+        searchContext.setSegments(noScoreWords);//提供给高亮
     }
 
     private List<ProductResponse> convert2Products(List<Long> ids) {
