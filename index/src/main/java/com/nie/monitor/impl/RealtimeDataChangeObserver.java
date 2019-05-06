@@ -30,9 +30,9 @@ public class RealtimeDataChangeObserver implements Observer {
             this.message = (DataChangeMessage)nieMessage;
             //OtherOperatorSteps
             System.out.println("RealtimeDataChangeObserver接收到消息，正在处理消息======================================");
-            for (Long id : message.getIdList()){
-                System.out.println(id);
-            }
+//            for (Long id : message.getIdList()){
+//                System.out.println(id);
+//            }
 
             if(message.getIdList().isEmpty()) return;
 

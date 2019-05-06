@@ -19,7 +19,8 @@ public class IndexSearcherFactory {
     private IndexReader getIndexReader() {
         IndexReader indexReader = null;
         try {
-           Directory dir = FSDirectory.open(Paths.get("D:\\testLucene"));
+//           Directory dir = FSDirectory.open(Paths.get("D:\\testLucene"));
+           Directory dir = FSDirectory.open(Paths.get("/Users/zhaochengye/Documents/myTest"));
            indexReader = StandardDirectoryReader.open(dir);
         } catch (IOException e) {
             log.error(e);

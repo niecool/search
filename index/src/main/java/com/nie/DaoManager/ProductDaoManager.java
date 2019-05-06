@@ -22,4 +22,5 @@ public class ProductDaoManager {
         productExample.createCriteria().andIdIn(ids);
         return productDao.selectByExample(productExample);
     }
+
 }

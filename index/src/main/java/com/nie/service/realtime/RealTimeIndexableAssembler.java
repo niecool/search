@@ -4,12 +4,10 @@ import com.nie.DaoManager.ProductDaoManager;
 import com.nie.frame.DataRecord;
 import com.nie.frame.Processor;
 import com.nie.frame.process.RealTimeProcessorContext;
-import com.nie.model.BusinessProduct;
 import com.nie.model.ProductIndexable;
 import com.nie.service.realtime.processor.Convert2ProductIndexable;
 import com.nie.service.realtime.processor.ExpandProductIdsProcessor;
 import com.nie.service.realtime.processor.SegmentWordsProcessor;
-import com.nie.utils.ApplicationContextUtils;
 import org.apache.log4j.Logger;
 import org.springframework.context.support.ApplicationObjectSupport;
 import org.springframework.stereotype.Component;
@@ -76,7 +74,7 @@ public class RealTimeIndexableAssembler extends ApplicationObjectSupport {
 
 
 
-
+    @SuppressWarnings("unchecked")
     List<Processor<DataRecord>>getMapProcessor(){
         List<Processor<DataRecord>> mapProcessors = new ArrayList<Processor<DataRecord>>();
         mapProcessors.add((ExpandProductIdsProcessor)(getApplicationContext().getBean("expandProductIdsProcessor")));

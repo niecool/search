@@ -10,7 +10,7 @@
         <constructor-arg ref="realtimeDataChangeObserver"/>
     </bean>
 
-    <bean id="DBWatcher" class="com.nie.service.dataLoad.DBWatcher">
+    <bean id="DBWatcher" class="com.nie.service.dataLoad.DBWatcher" init-method="start">
         <constructor-arg index="0" name="server" ref="observerServer"/>
         <constructor-arg index="1" name="threadPoolNum" value="${dataWatcherThreadPoolNum}"/>
     </bean>

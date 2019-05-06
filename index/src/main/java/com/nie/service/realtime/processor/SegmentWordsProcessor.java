@@ -20,7 +20,6 @@ import java.util.stream.Collectors;
  * @author zhaochengye
  * @date 2019-04-24 19:16
  */
-@Component
 public class SegmentWordsProcessor implements Processor {
 
     NieSegmenter nieSegmenter;

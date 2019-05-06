@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+<!--    &lt;!&ndash; 最新版本的 Bootstrap 核心 CSS 文件 &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
+
+<!--    &lt;!&ndash; 可选的 Bootstrap 主题文件（一般不用引入） &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+
+<!--    &lt;!&ndash; 最新的 Bootstrap 核心 JavaScript 文件 &ndash;&gt;-->
+<!--    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>-->
+
+<!--    &lt;!&ndash; 最新的 Bootstrap 核心 JavaScript 文件 &ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>-->
+
+
+
+
+
+
+
+
+
+
+
+    <link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <link href="css/style.css" rel='stylesheet' type='text/css' />
+    <!-- Custom Theme files -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--webfont-->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <!--dropdown-->
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.easydropdown.js"></script>
+    <!-- FlexSlider -->
+    <link href="css/flexslider.css" rel='stylesheet' type='text/css' />
+    <script defer src="js/jquery.flexslider.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            SyntaxHighlighter.all();
+        });
+        $(window).load(function(){
+            $('.flexslider').flexslider({
+                animation: "slide",
+                start: function(slider){
+                    $('body').removeClass('loading');
+                }
+            });
+        });
+    </script>
+    <!-- FlexSlider -->
+    <!--Animation-->
+    <script src="js/wow.min.js"></script>
+    <link href="css/animate.css" rel='stylesheet' type='text/css' />
+    <script>
+        new WOW().init();
+
+        var redirectResultPage = function (event) {
+            event.preventDefault();
+            var text = $("#input").val().trim();
+            if(text){
+                location.href = location.protocol+"//"+location.host+"/result.html?keyword="+text;
+            }else{
+                alert("请输入搜索词！");
+            }
+        }
+    </script>
+
+
+
+
+</head>
+<body>
+    <div class="content_bottom">
+        <div class="search wow bounceInUp" data-wow-delay="0.4s">
+            <h3>Looking for products ? </h3>
+            <form>
+                 <span>
+                   <div class="search-box">
+                    <i class="search-icon"> </i>
+                    <input type="text" value="Type something here..." id="input" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Type something here...';}">
+                   </div>
+                   <input name="submit" type="submit" id="submit" onclick="redirectResultPage(event)" value="Search">
+                 </span>
+                <div class="clearfix"> </div>
+            </form>
+            <h4>Introduction</h4>
+            <p class="m_2">Study hard and make progress every day.</p>
+            <p class="m_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum.</p>
+            <p>Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum. </p>
+        </div>
+    </div>
+</body>
+
+</body>
+</html>

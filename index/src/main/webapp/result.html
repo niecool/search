@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>search result</title>
+
+        <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- 可选的 Bootstrap 主题文件（一般不用引入） -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- jquery 文件 -->
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+        <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <script type="application/javascript">
+        var homepageUrl = location.protocol+"//"+location.host;
+        var redirectHome = function () {
+            location.href=homepageUrl;
+        }
+        function GetUrlParam(paraName) {
+            var url = document.location.toString();
+            var arrObj = url.split("?");
+
+            if (arrObj.length > 1) {
+                var arrPara = arrObj[1].split("&");
+                var arr;
+
+                for (var i = 0; i < arrPara.length; i++) {
+                    arr = arrPara[i].split("=");
+
+                    if (arr != null && arr[0] == paraName) {
+                        return arr[1];
+                    }
+                }
+                return "";
+            }
+            else {
+                return "";
+            }
+        }
+
+        var keyWord =GetUrlParam("keyword");
+        // alert(keyWord);
+        url = location.protocol+"//"+location.host+"/search/getProducts";
+        data = {
+            keyWord:keyWord
+        }
+        $.get(url,data, function(msg)         {
+            msg = JSON.parse(msg)
+            if(msg && msg.success && msg.code==200){
+                renderPage(msg.data);
+            }else if(msg && msg.success) {
+                alert("返回结果为空！请重新输入关键词");
+            }else{
+                alert(msg.msg);
+            }
+            //msg返回值，可以为json或者字符串
+
+        });
+
+        var renderPage = function (data) {
+            var html = ""
+            for (let i = 0; i < data.length; i++) {
+                var p = data[i];
+                html += '<li class="list-group-item">' +
+                    'productCname=' + data[i].productCname +
+                        'id='+data[i].id +
+                        'inPrice='+ data[i].inPrice+
+                        ''
+                + '</li>';
+            }
+            debugger;
+            $("#ProductContent").html(html)
+        }
+
+    </script>
+</head>
+<body>
+<ul class="nav nav-pills">
+    <li role="presentation" class="active"><a href="#" onclick="redirectHome()">Home</a></li>
+<!--    <li role="presentation"><a href="#">refresh</a></li>-->
+<!--    <li role="presentation"><a href="#">Messages</a></li>-->
+</ul>
+<ul class="list-group" id="ProductContent">
+<!--    <li class="list-group-item">Example</li>-->
+<!--    <li class="list-group-item">Dapibus ac facilisis in</li>-->
+<!--    <li class="list-group-item">Morbi leo risus</li>-->
+<!--    <li class="list-group-item">Porta ac consectetur ac</li>-->
+<!--    <li class="list-group-item">Vestibulum at eros</li>-->
+</ul>
+
+</body>
+</html>

@@ -1,9 +1,12 @@
 package com.nie.model.pojo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Date;
 
-public class Product {
+public class Product implements Serializable {
+    private static final long serialVersionUID = 2383754369659151353L;
+
     private Long id;
 
     private String productCode;

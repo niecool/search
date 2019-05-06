@@ -1,5 +1,8 @@
 package com.nie.util;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author zhaochengye
  * @date 2019-04-24 21:40
@@ -31,5 +34,27 @@ public class Test{
 class Bean{
     class Bean3{
         public int k = 0;
+    }
+
+
+    public static void main(String[] args) {
+        List<Integer> a = new ArrayList<>();
+        System.out.println(a.hashCode());
+        build(a);
+        System.out.println(a.size()+"++++++++++");
+
+    }
+
+
+    /**
+     *
+     */
+    public static void build(List<Integer> a){
+        System.out.println(a.hashCode());
+        List b = new ArrayList();
+        b.add(1);
+        b.add(2);
+        a = b;
+        System.out.println(a.size()+"===========");
     }
 }
