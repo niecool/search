@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!--    &lt;!&ndash;-->
+<!--      一个DataProvider的实例：-->
+<!--      FileDataProvider递归的访问一个指定的路径，将得到的文件构造成索引请求提供给DataConsumer。-->
+<!--      在本例中，此生产者需要通过jmx进行手动启动。-->
+<!--    &ndash;&gt;-->
+<!--    <bean id="dataprovider" class="proj.zoie.impl.indexing.FileDataProvider">-->
+<!--        <constructor-arg value="file:${source.directory}"/>-->
+<!--        <property name="dataConsumer" ref="indexingSystem" />-->
+<!--    </bean>-->
+<!--    &lt;!&ndash;-->
+<!--      一个IndexableInterpreter的实例：-->
+<!--      在本例中，FileIndexableInterpreter将一个文本文件转换成为一个Lucene的Document对象。-->
+<!--      从上面的介绍中我们知道，DataProvider作为一个生产者生产了DataEvent对象供消费者DataConsumer进行消费，-->
+<!--      然而由于Zoie最终是基于Lucene的，Lucene是不能够索引DataEvent对象的，-->
+<!--      这就需要有人负责将DataEvent转换成为Lucene的Document对象，根据应用的需要控制添加那些Field，-->
+<!--      添加什么样的Field等，此工作由翻译器Interpreter完成。-->
+<!--    &ndash;&gt;-->
+<!--    <bean id="fileInterpreter" class="proj.zoie.impl.indexing.FileIndexableInterpreter" />-->
+<!--    &lt;!&ndash;-->
+<!--      一个IndexReader的装饰者：-->
+<!--      默认的装饰者什么都不做，将原IndexReader返回。-->
+<!--      注意这里使用的是一个重要的设计模式，装饰者模式。-->
+<!--      被包装的IndexReader是直接打开Lucene索引的IndexReader，IndexReaderFactory在得到这些IndexReader后，-->
+<!--      都会经过此类封装一下，再返回给用户。基本的Lucene的IndexReader打开，会加载和初始化一些基本的东西，-->
+<!--      然而有时候，用户需要在IndexReader打开的时候，同时加载一些自己的东西，此类给了用户这样一个机会，-->
+<!--      用户只要实现自己的装饰者就可以了。在和Zoie同一个项目Bobo(实现Facet搜索，使用过Solr的同学可能会比较熟悉)中，-->
+<!--      实现了BoboIndexReaderDecorator，其作用就是在IndexReader打开的时候，将Facet信息加载到内存中形成某种数据结构，-->
+<!--      从而在收集Facet的时候快速的使用。-->
+<!--    &ndash;&gt;-->
+<!--    <bean id="idxDecorator" class="proj.zoie.impl.indexing.DefaultIndexReaderDecorator" />-->
+<!--    &lt;!&ndash;-->
+<!--      一个ZoieSystem的声明，在上面的DataProvider的声明中，其是作为一个DataConsumer传入的。-->
+<!--    &ndash;&gt;-->
+<!--    <bean id="indexingSystem" class="proj.zoie.impl.indexing.ZoieSystem" init-method="start" destroy-method="shutdown">-->
+<!--        &lt;!&ndash; disk index directory 索引文件夹&ndash;&gt;-->
+<!--        <constructor-arg index="0" value="file:${index.directory}"/>-->
+<!--        &lt;!&ndash; sets the interpreter 设置翻译器&ndash;&gt;-->
+<!--        <constructor-arg index="1" ref="fileInterpreter" />-->
+<!--        &lt;!&ndash; sets the decorator 设置装饰器&ndash;&gt;-->
+<!--        <constructor-arg index="2">-->
+<!--            <ref bean="idxDecorator"/>-->
+<!--        </constructor-arg>-->
+<!--        &lt;!&ndash; set the Analyzer, if null is passed, Lucene's StandardAnalyzer is used-->
+<!--           设置分词器，如果为null，则使用默认的Lucene的StandardAnalyzer-->
+<!--        &ndash;&gt;-->
+<!--        <constructor-arg index="3">-->
+<!--            <null/>-->
+<!--        </constructor-arg>-->
+<!--        &lt;!&ndash; sets the Similarity, if null is passed, Lucene's DefaultSimilarity is used-->
+<!--           设置相似性评分器，如果为null，则使用Lucene默认的DefaultSimilarity-->
+<!--        &ndash;&gt;-->
+<!--        <constructor-arg index="4">-->
+<!--            <null/>-->
+<!--        </constructor-arg>-->
+<!--        &lt;!&ndash; the following parameters indicate how often to triggered batched indexing,-->
+<!--             whichever the first of the following two event happens will triggered indexing-->
+<!--           下面的两个参数表示触发批量索引的频率，任意一个满足条件则触发索引。-->
+<!--        &ndash;&gt;-->
+<!--        &lt;!&ndash; Batch size: how many items to put on the queue before indexing is triggered-->
+<!--             批量大小：即队列中放入多少项方才触发索引-->
+<!--        &ndash;&gt;-->
+<!--        <constructor-arg index="5" value="1000" />-->
+<!--        &lt;!&ndash; Batch delay, how long to wait before indxing is triggered-->
+<!--           批量延时：即等待多长时间方才触发索引-->
+<!--        &ndash;&gt;-->
+<!--        <constructor-arg index="6" value="300000" />-->
+<!--        &lt;!&ndash; flag turning on/off real time indexing-->
+<!--           是否开启实时索引的标志位-->
+<!--         &ndash;&gt;-->
+<!--        <constructor-arg index="7" value="true" />-->
+<!--    </bean>-->
+
+<!--    &lt;!&ndash; a search service 一个搜索服务 &ndash;&gt;-->
+<!--    <bean id="mySearchService" class="com.mycompany.search.SearchService">-->
+<!--        &lt;!&ndash; ZoieSystem作为IndexReaderFactory向搜索服务提供IndexReader列表，使其可以构造Searcher。-->
+<!--         &ndash;&gt;-->
+<!--        <constructor-arg ref="indexingSystem" />-->
+<!--    </bean>-->
+</beans>
