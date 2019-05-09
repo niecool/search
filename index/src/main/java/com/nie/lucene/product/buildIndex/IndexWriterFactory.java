@@ -22,6 +22,7 @@ public class IndexWriterFactory {
             try {
                 Directory dir = FSDirectory.open(Paths.get("/Users/zhaochengye/Documents/myTest"));
                 IndexWriterConfig config = new IndexWriterConfig();
+                config.setUseCompoundFile(false);
                 config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);
                 instance1 = new IndexWriter(dir,config);
             } catch (IOException e) {

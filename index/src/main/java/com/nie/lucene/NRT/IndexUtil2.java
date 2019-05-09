@@ -143,9 +143,8 @@ public class IndexUtil2 {
 
     //删除索引
     public void delete(){
-        IndexWriter writer = null;
         try {
-            writer.deleteDocuments(new Term("id", "1"));//这里表示删除索引为1的id
+            _reopenToken = writer.deleteDocuments(new Term("id", "2"));//这里表示删除索引为1的id
         } catch (CorruptIndexException e) {
             e.printStackTrace();
         } catch (LockObtainFailedException e) {
@@ -246,7 +245,7 @@ public class IndexUtil2 {
 
     public void commit(){
         try {
-            writer.commit();
+            _reopenToken = writer.commit();
         } catch (CorruptIndexException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -266,5 +265,9 @@ public class IndexUtil2 {
         util.search01();
         System.out.println("=======333======");
         util.search02();
+        util.delete();
+        System.out.println("=======444======");
+        util.search02();
+        util.commit();
     }
 }
