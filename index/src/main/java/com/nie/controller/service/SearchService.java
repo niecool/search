@@ -4,6 +4,7 @@ import com.nie.DaoManager.ProductDaoManager;
 import com.nie.controller.model.ProductRequest;
 import com.nie.controller.model.ProductResponse;
 import com.nie.controller.model.SearchContext;
+import com.nie.lucene.product.NRTIndexSearchFactory;
 import com.nie.lucene.product.search.IndexSearcherFactory;
 import com.nie.model.pojo.Product;
 import com.nie.segment.segmentor.NieSegmenter;
@@ -30,7 +31,7 @@ import java.util.stream.Collectors;
 @Component
 public class SearchService {
     Logger LOG = Logger.getLogger(SearchService.class);
-    private IndexSearcher indexSearcher = new IndexSearcherFactory().getIndexSearcher();
+    private IndexSearcher indexSearcher;
     @Resource
     private ProductDaoManager productDaoManager;
     @Autowired
@@ -41,8 +42,11 @@ public class SearchService {
      */
     public List<ProductResponse> getProducts(SearchContext searchContext){
         List<ProductResponse> responses = new ArrayList<>();
+        NRTIndexSearchFactory factory =  new NRTIndexSearchFactory();
         try {
             buildQuery(searchContext);
+//            indexSearcher = new IndexSearcherFactory().getIndexSearcher();
+            indexSearcher = factory.getIndexSearcher();
             TopDocs topDocs = indexSearcher.search(searchContext.getQuery(),50);//todo 个数需要可配置
             if(topDocs.totalHits<1) return responses;
             List<Long> ids = new ArrayList();
@@ -56,8 +60,14 @@ public class SearchService {
             }
             responses = convert2Products(ids);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e);
             return responses;
+        }finally {
+            try {
+                factory.getSearcherManager().release(indexSearcher);
+            } catch (IOException e) {
+                LOG.error(e);
+            }
         }
         return responses;
 

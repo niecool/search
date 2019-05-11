@@ -1,8 +1,8 @@
 package com.nie.utils;
 
-import com.alibaba.druid.sql.visitor.functions.Char;
 import com.nie.DaoManager.KeywordDictDaoManager;
 import com.nie.model.pojo.KeywordDict;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
@@ -23,6 +23,7 @@ import java.util.stream.Collectors;
 @Component
 public class ImportCSV2DB {
 
+    private static Logger LOG = Logger.getLogger(ImportCSV2DB.class);
     @Resource
     private KeywordDictDaoManager keywordDictDaoManager;
 
@@ -71,7 +72,7 @@ public class ImportCSV2DB {
 //                           haha(list.subList(l * 100000, (l + 1) * 100000 > list.size() ? list.size() : (l + 1) * 100000));
 //                           return true;
 //                        }catch (Exception e){
-//                            e.printStackTrace();
+//                            LOG.error(e);;
 //                            return null;
 ////                            System.exit(0);//错误就终止，不能漏掉
 //                        }
@@ -89,9 +90,9 @@ for (Future<Boolean> future: futures){
         Boolean su = future.get();
 
     } catch (InterruptedException e) {
-        e.printStackTrace();
+        LOG.error(e);;
     } catch (ExecutionException e) {
-        e.printStackTrace();
+        LOG.error(e);;
     }
 }
 
@@ -142,7 +143,7 @@ for (Future<Boolean> future: futures){
                         try {
                             keywordDictDaoManager.batchInsert(list.subList(l * 1000, (l + 1) * 1000 > list.size() ? list.size() : (l + 1) * 1000));
                         }catch (Exception e){
-                            e.printStackTrace();
+                            LOG.error(e);;
                             System.exit(0);//错误就终止，不能漏掉
                         }
                     }
@@ -182,14 +183,14 @@ for (Future<Boolean> future: futures){
 
             }
         }catch (Exception e) {
-            e.printStackTrace();
+            LOG.error(e);;
         }finally{
             if(br!=null){
                 try {
                     br.close();
                     br=null;
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    LOG.error(e);;
                 }
             }
         }

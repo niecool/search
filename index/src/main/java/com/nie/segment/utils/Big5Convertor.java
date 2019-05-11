@@ -89,7 +89,7 @@ public class Big5Convertor {
                 }
             } while (in != null);
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error(e);
         } finally {
             try {
                 if (br != null) {

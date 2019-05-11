@@ -2,6 +2,10 @@ package com.nie.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 /**
  * @author zhaochengye
@@ -9,6 +13,7 @@ import java.util.List;
  */
 public class Test{
     public static void main(String[] args){
+
         // 初始化Bean1
         Test test = new Test();
         Bean1 bean1 = test.new Bean1();

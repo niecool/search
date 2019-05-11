@@ -60,11 +60,12 @@
     <script>
         new WOW().init();
 
+        var contextPath = "/search-index";
         var redirectResultPage = function (event) {
             event.preventDefault();
             var text = $("#input").val().trim();
             if(text){
-                location.href = location.protocol+"//"+location.host+"/result.html?keyword="+text;
+                location.href = location.protocol+"//"+location.host+contextPath+"/result.html?keyword="+text;
             }else{
                 alert("请输入搜索词！");
             }

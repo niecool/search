@@ -1,11 +1,13 @@
 package com.nie.lucene.product.buildIndex;
 
+import com.nie.CustomizedPropertyPlaceholderConfigurer;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.Directory;
 import org.apache.lucene.store.FSDirectory;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 /**
@@ -20,7 +22,9 @@ public class IndexWriterFactory {
         static {
             IndexWriter instance1 = null;
             try {
-                Directory dir = FSDirectory.open(Paths.get("/Users/zhaochengye/Documents/myTest"));
+                String pathStr = (String) CustomizedPropertyPlaceholderConfigurer.getContextProperty("lucene.path.tencloud");
+                Path path = Paths.get(pathStr);
+                Directory dir = FSDirectory.open(path);
                 IndexWriterConfig config = new IndexWriterConfig();
                 config.setUseCompoundFile(false);
                 config.setOpenMode(IndexWriterConfig.OpenMode.CREATE);

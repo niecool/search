@@ -1,5 +1,6 @@
 package com.nie.lucene.product.search;
 
+import com.nie.lucene.product.NRTIndexSearchFactory;
 import org.apache.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.IndexReader;
@@ -14,9 +15,11 @@ public class ProductSearcher {
     private IndexSearcher indexSearcher;
 
     public void searchIndex(){
-        indexSearcher = new IndexSearcherFactory().getIndexSearcher();
+//        indexSearcher = new IndexSearcherFactory().getIndexSearcher();
+        NRTIndexSearchFactory factory =  new NRTIndexSearchFactory();
+        indexSearcher = factory.getIndexSearcher();
         try {
-            TopDocs topDocs = indexSearcher.search(buildQuery(),10);
+            TopDocs topDocs = indexSearcher.search(buildQuery(),50);
             System.out.println(topDocs.totalHits);
             ScoreDoc[] scoreDocs = topDocs.scoreDocs;
 
@@ -30,6 +33,12 @@ public class ProductSearcher {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }finally {
+            try {
+                factory.getSearcherManager().release(indexSearcher);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 

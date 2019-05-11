@@ -236,4 +236,8 @@
 <!--        </profile>-->
     </profiles>
 
+    <build>
+        <finalName>search-index</finalName>
+    </build>
+
 </project>

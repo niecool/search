@@ -55,7 +55,7 @@ public class IndexUtil2 {
             scores.put("qq.com", 2.0f);//如果是"qq.com"结尾的索引则让其权值为2.0，注意：默认是1.0
             scores.put("sina.edu", 1.5f);
             directory = FSDirectory.open(Paths.get("/Users/zhaochengye/Documents/myTest/test"));
-            writer = new IndexWriter(directory, new IndexWriterConfig(new StandardAnalyzer()));
+            writer = new IndexWriter(directory, new IndexWriterConfig(new StandardAnalyzer()).setUseCompoundFile(false));
             searcherManager = new SearcherManager(writer, new SearcherFactory());
             CRTReopenThread = new ControlledRealTimeReopenThread<>(
                     writer,searcherManager,5.0,1);//重新打开的时候间隔最大为5.0，最小为0.025，0.025为25秒

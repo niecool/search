@@ -1,5 +1,6 @@
 package com.nie.lucene.product.buildIndex;
 
+import com.nie.lucene.product.NRTIndexSearchFactory;
 import com.nie.model.ProductIndexable;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
@@ -16,7 +17,9 @@ import java.util.List;
  */
 public class ProductIndexer {
 
-    IndexWriter indexWriter = IndexWriterFactory.getSingletonIndexWriter();
+//    IndexWriter indexWriter = IndexWriterFactory.getSingletonIndexWriter();
+    NRTIndexSearchFactory factory =  new NRTIndexSearchFactory();
+    IndexWriter indexWriter = factory.getIndexWriter();
     List<Document> documents = new ArrayList<Document>();
 
     /**
@@ -25,8 +28,10 @@ public class ProductIndexer {
     public void writeIndex(List<ProductIndexable> productIndexables){
         try {
             init(productIndexables);
-            indexWriter.addDocuments(documents);
-            indexWriter.commit();
+            long token = indexWriter.addDocuments(documents);
+            factory.setToken(token);
+            token = indexWriter.commit();
+            factory.setToken(token);
         } catch (Exception e) {
             e.printStackTrace();
         }finally {

@@ -138,7 +138,6 @@ public class DBWatcher extends Thread{
                                 DataChangeMessage dcm = checker.getDataChange();
                                 return dcm;
                             } catch (Exception e) {
-                                e.printStackTrace();
                                 log.error("Failed to check update, :  "
                                         + checker, e);
                                 return null;

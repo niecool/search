@@ -3,10 +3,10 @@ package com.nie.interviews.ThreadConmunication.threadPool;
 import com.nie.interviews.ThreadConmunication.join.TestJoin;
 import org.apache.log4j.Logger;
 
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.*;
+import java.util.stream.Collectors;
 
 /**
  * @author zhaochengye
@@ -47,7 +47,27 @@ public class ThreadPoolTest {
     }
 
     public static void main(String[] args) throws Exception {
-        executorService();
+//        executorService();
+        haha();
+    }
+    
+    
+    
+    
+    
+    //异步线程
+    
+    /**
+     * 
+     */
+    public static void haha(){
+        List<String> strList = new ArrayList<>();
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        List<CompletableFuture<String>> retFuture = strList.stream().map(str -> CompletableFuture.supplyAsync(()->str.trim(), executor))
+                .map(future -> future.thenApply(String::trim))
+                .map(future -> future.thenCompose(str -> CompletableFuture.supplyAsync(()->str.trim(), executor)))
+                .collect(Collectors.toList());
+
     }
 
 }
