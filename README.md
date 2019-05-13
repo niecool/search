@@ -16,6 +16,4 @@ username:root
 password:
 
 
-Elasticsearch
-address:http://152.136.70.24:9200/
  
