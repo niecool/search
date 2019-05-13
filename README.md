@@ -9,13 +9,13 @@ Project Outline
 5.search-server
 6.search-page
 
-
 Data Repository
 mysql:
 database:152.136.70.24:3306/search
 username:root
-password:@Chengyea
+password:
 
 
 Elasticsearch
 address:http://152.136.70.24:9200/
+ 
